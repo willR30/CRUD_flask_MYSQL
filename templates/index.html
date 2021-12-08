@@ -1,0 +1,33 @@
+<form action="/add_contact" method="POST"><!--debemos indicar a que ruta del archivo en python deben de ir los datos y medieante que tipo de metodo-->
+    <input type="text" name="txt_fullname" placeholder="fullname"> 
+    <input type="text" name="txt_phone" placeholder="phone"> 
+    <input type="text" name="txt_email" placeholder="email"> 
+    <button type="submit">
+        save
+    </button>
+</form>
+<!--Empezamos a trabajar con la tabla que va a contener los registros que se vayan mostrando-->
+<table>
+    <thead><!--Esta etiqueta hace referencia a la cabeza de la tabla-->
+        <tr>
+            <td>Fullname</td>
+            <td>Phone</td>
+            <td>Email</td>
+            <td>Operaciones</td>
+        </tr>
+    </thead>
+    <tbody><!--esta hace referencia al cuerpo de la tabla-->
+        {% for contacto in datos %}
+            <tr><!--Representa una fila de la base de datos-->
+                <!--AL recorrer una matriz especificamos el indice que queremos mostrar y donde queremos mostrarlo-->
+                <td>{{ contacto.1 }}</td><!--Representa una celda dentro de la fila-->
+                <td>{{contacto.2}}</td>
+                <td>{{contacto.3}}</td>
+                <td> 
+                    <button type="submit" ><a href="/get_contact/{{contacto.0}}">Edit</a> </button><!--pasamos le id para editarlo-->
+                     <button type="submit"><a href="/delete_contact/{{contacto.0}}">Delete</a></button><!--Pasamos como parametro el id del contacto a eliminar-->
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody> 
+</table>
